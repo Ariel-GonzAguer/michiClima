@@ -19,7 +19,6 @@ export default function App() {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   }
 
-
   function formatDate(date: string): string {
     const [year, month, day] = date.split('-');
     return `${day}/${month}/${year.slice(2)}`;
@@ -38,7 +37,7 @@ export default function App() {
 
   async function getWeather(lat: number, lon: number) {
     try {
-      const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=91b01f57936a4dddb49223735251402&q=${lat},${lon}&days=2&aqi=no&lang=es&alerts=yes`);
+      const response = await fetch(`http://localhost:3001/weather?lat=${lat}&lon=${lon}`);
       const data = await response.json();
       setCondicion(data.current.condition.text);
       setTemperatura(data.current.temp_c);
@@ -47,7 +46,7 @@ export default function App() {
       setImg(data.current.condition.icon);
       setSensacionTermica(data.current.heatindex_c);
       setHumedad(data.current.humidity);
-      setAlertas(capitalize(data.alerts.alert[0].headline));
+      setAlertas(capitalize(data.alerts.alert[0]?.headline || ''));
       setFaseLunar(moonPhaseTranslations[data.forecast.forecastday[0].astro.moon_phase] || data.forecast.forecastday[0].astro.moon_phase);
       setClimaMañana(data.forecast.forecastday[1]);
       console.log(data);
@@ -73,7 +72,6 @@ export default function App() {
         {
           enableHighAccuracy: true
         }
-
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
@@ -86,8 +84,6 @@ export default function App() {
 
   return (
     <div>
-      {/* <h1>Hello, React!</h1>
-      <button onClick={handleGetWeather}>Get Weather</button> */}
       <p>Ubicación: {ubicacion || "🌎"}</p>
       <p>Latitud: {latitude || "✏️"}</p>
       <p>Longitud: {longitud || "✍🏼"}</p>
@@ -101,9 +97,7 @@ export default function App() {
       <p>Alertas: {alertas || "🚨"}</p>
       <p>Fase lunar: {faseLunar || "🌕"}</p>
 
-      {
-        img ? <img src={img} alt="Weather icon" /> : null
-      }
+      {img ? <img src={img} alt="Weather icon" /> : null}
 
       {climaMañana && (
         <div>
