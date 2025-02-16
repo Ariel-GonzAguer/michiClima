@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { formatDate } from "../utils/utils";
 import useClimaStore from "../state/useClimaStore";
 
-import styles from "../styles/Clima.module.css";
+// import styles from "../styles/Clima.module.css";
 
 export default function Clima() {
 
@@ -16,16 +16,16 @@ export default function Clima() {
   useEffect(() => {
     handleGetWeather();
   }, []);
-
+/* */
   return (
-    <section className={styles.climaSection}>
-      <section className={styles.ubicacion}>
+    <section /*className={styles.climaSection}*/>
+      <section /* className={styles.ubicacion}*/>
         <p>{weather.location || "🌎"}</p>
         <p>Latitud: {geolocation.latitude || "✏️"}</p>
         <p>Longitud: {geolocation.longitude || "✍🏼"}</p>
       </section>
 
-      <section className={styles.datosClimaActual}>
+      <section /* className={styles.datosClimaActual}*/>
         <p>Condición: {weather.condition || "🌟"}</p>
         <p>Temperatura: {weather.temperature ? `${weather.temperature}°c` : "🌡️"}</p>
         <p>Viento: {weather.wind ? `${weather.wind}km/h` : "🍃"}</p>
@@ -38,7 +38,7 @@ export default function Clima() {
         }
       </section>
 
-      <section className={styles.pronosticoMañana}>
+      <section /* className={styles.pronosticoMañana}*/>
         {weather.forecastTomorrow && weather.forecastTomorrow.date && (
           <div>
             <h2>Pronóstico para mañana</h2>
