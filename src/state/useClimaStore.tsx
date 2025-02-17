@@ -39,7 +39,7 @@ const useClimaStore = create<ClimaStore>()(persist(
           },
           (error: any) => {
             set((state) => {
-              state.errores.push("Geolocalizacón no está activada o no es soportada por este navegador.");
+              state.errores.push(error.message);
             });
           },
           {
