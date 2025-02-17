@@ -26,27 +26,32 @@ const useClimaStore = create<ClimaStore>()(persist(
     // otros estados
     LavarRopa: false,
     errores: [],
+    isLoading: false,
 
     // acciones 
     getGeolocation: () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            set((state) => {
-              state.geolocation = { latitude, longitude };
-            });
-          },
-          (error: any) => {
-            set((state) => {
-              state.errores.push(error.message);
-            });
-          },
-          {
-            enableHighAccuracy: true,
-          }
-        );
-      }
+      return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              set((state) => {
+                state.geolocation = { latitude, longitude };
+              });
+              resolve(position);
+            },
+            (error) => {
+              set((state) => {
+                state.errores.push(error.message);
+              });
+              reject(error);
+            },
+            {
+              enableHighAccuracy: true,
+            }
+          );
+        }
+      });
     },
 
     getWeather: async (lat: number, lon: number) => {
@@ -86,12 +91,16 @@ const useClimaStore = create<ClimaStore>()(persist(
       });
     },
     setWeather: async () => {
+      set(state => { state.isLoading = true; });
+
       const { getGeolocation } = get();
       await getGeolocation();
       const { geolocation } = get();
       const { latitude, longitude } = geolocation;
       const { getWeather } = get();
       await getWeather(latitude, longitude);
+
+      set(state => { state.isLoading = false; });
 
     },
   })),

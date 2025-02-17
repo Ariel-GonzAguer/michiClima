@@ -7,7 +7,7 @@ import useClimaStore from "../state/useClimaStore";
 
 export default function Clima() {
 
-  const { weather, geolocation, setWeather } = useClimaStore();
+  const { weather, geolocation, setWeather, isLoading } = useClimaStore();
 
   async function handleGetWeather() {
     await setWeather();
@@ -16,40 +16,47 @@ export default function Clima() {
   useEffect(() => {
     handleGetWeather();
   }, []);
-/* */
+  /* */
   return (
+
     <section /*className={styles.climaSection}*/>
-      <section /* className={styles.ubicacion}*/>
-        <p>{weather.location || "🌎"}</p>
-        <p>Latitud: {geolocation.latitude || "✏️"}</p>
-        <p>Longitud: {geolocation.longitude || "✍🏼"}</p>
-      </section>
 
-      <section /* className={styles.datosClimaActual}*/>
-        <p>Condición: {weather.condition || "🌟"}</p>
-        <p>Temperatura: {weather.temperature ? `${weather.temperature}°c` : "🌡️"}</p>
-        <p>Viento: {weather.wind ? `${weather.wind}km/h` : "🍃"}</p>
-        <p>Sensación térmica: {weather.feelsLike ? `${weather.feelsLike}°c` : "❄️"}</p>
-        <p>Humedad: {weather.humidity ? `${weather.humidity}%` : "💧"}</p>
-        <p>Calidad del aire: {weather.airQuality ? `${weather.airQuality}` : "🌫️"}</p>
-        <p>Alertas: {weather.alerts || "🚨"}</p>
-        {
-          weather.img ? <img src={weather.img} alt="Weather icon" /> : null
-        }
-      </section>
+      {isLoading ? (
+        <p>Cargando datos del clima...</p>
+      ) : (
+        <>
+          <section /* className={styles.ubicacion}*/>
+            <p>{weather.location || "🌎"}</p>
+            <p>Latitud: {geolocation.latitude || "✏️"}</p>
+            <p>Longitud: {geolocation.longitude || "✍🏼"}</p>
+          </section>
 
-      <section /* className={styles.pronosticoMañana}*/>
-        {weather.forecastTomorrow && weather.forecastTomorrow.date && (
-          <div>
-            <h2>Pronóstico para mañana</h2>
-            <p>Fecha: {formatDate(weather.forecastTomorrow.date)}</p>
-            <p>Pronóstico: {weather.forecastTomorrow.day.condition.text}</p>
-            <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" />
-          </div>
-        )}
-      </section>
+          <section /* className={styles.datosClimaActual}*/>
+            <p>Condición: {weather.condition || "🌟"}</p>
+            <p>Temperatura: {weather.temperature ? `${weather.temperature}°c` : "🌡️"}</p>
+            <p>Viento: {weather.wind ? `${weather.wind}km/h` : "🍃"}</p>
+            <p>Sensación térmica: {weather.feelsLike ? `${weather.feelsLike}°c` : "❄️"}</p>
+            <p>Humedad: {weather.humidity ? `${weather.humidity}%` : "💧"}</p>
+            <p>Calidad del aire: {weather.airQuality ? `${weather.airQuality}` : "🌫️"}</p>
+            <p>Alertas: {weather.alerts || "🚨"}</p>
+            {
+              weather.img ? <img src={weather.img} alt="Weather icon" /> : null
+            }
+          </section>
 
-
+          <section /* className={styles.pronosticoMañana}*/>
+            {weather.forecastTomorrow && weather.forecastTomorrow.date && (
+              <div>
+                <h2>Pronóstico para mañana</h2>
+                <p>Fecha: {formatDate(weather.forecastTomorrow.date)}</p>
+                <p>Pronóstico: {weather.forecastTomorrow.day.condition.text}</p>
+                <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" />
+              </div>
+            )}
+          </section>
+        </>
+      )
+      }
 
     </section>
   );
