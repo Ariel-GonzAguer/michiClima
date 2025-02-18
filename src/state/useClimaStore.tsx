@@ -57,7 +57,7 @@ const useClimaStore = create<ClimaStore>()(persist(
     getWeather: async (lat: number, lon: number) => {
       {
         try {
-          const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=91b01f57936a4dddb49223735251402&q=${lat},${lon}&days=2&aqi=yes&lang=es&alerts=yes`);
+          const response = await fetch(`/api/getWeather?lat=${lat}&lon=${lon}`);
           const data = await response.json();
 
           set((state) => {

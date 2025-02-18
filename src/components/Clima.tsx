@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import { WeatherData, Geolocation } from "../types/types";
 import { formatDate } from "../utils/utils";
 import useClimaStore from "../state/useClimaStore";
 
@@ -15,6 +14,7 @@ export default function Clima() {
 
   useEffect(() => {
     handleGetWeather();
+    // console.log(weather);
   }, []);
   /* */
   return (
@@ -25,7 +25,8 @@ export default function Clima() {
         <p>Cargando datos del clima...</p>
       ) : (
         <>
-          <section /* className={styles.ubicacion}*/>
+          <section /* className={styles.ubicacionActual}*/>
+            <h3>Tu ubicacion actual</h3>
             <p>{weather.location || "🌎"}</p>
             <p>Latitud: {geolocation.latitude || "✏️"}</p>
             <p>Longitud: {geolocation.longitude || "✍🏼"}</p>
