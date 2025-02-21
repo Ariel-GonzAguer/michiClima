@@ -4,8 +4,6 @@ import { persist } from "zustand/middleware";
 import { ClimaStore } from "../types/types";
 import { capitalize } from "../utils/utils";
 
-
-
 const useClimaStore = create<ClimaStore>()(persist(
   immer((set, get) => ({
     // estado clima
@@ -19,7 +17,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       humidity: 0,
       alerts: "",
       forecastTomorrow: [],
-      airQuality: 0,
+      airQuality: "No disponible",
     },
     // estado geolocalización
     geolocation: { latitude: 0, longitude: 0 },
@@ -59,6 +57,31 @@ const useClimaStore = create<ClimaStore>()(persist(
         try {
           const response = await fetch(`/api/getWeather?lat=${lat}&lon=${lon}`);
           const data = await response.json();
+          const dataAirQuality = data.current.air_quality["us-epa-index"];
+
+          let airQualityDescription;
+          switch (dataAirQuality) {
+            case 1:
+              airQualityDescription = "Buena";
+              break;
+            case 2:
+              airQualityDescription = "Moderada";
+              break;
+            case 3:
+              airQualityDescription = "No saludable";
+              break;
+            case 4:
+              airQualityDescription = "No saludable";
+              break;
+            case 5:
+              airQualityDescription = "Muy No saludable";
+              break;
+            case 6:
+              airQualityDescription = "Peligrosa";
+              break;
+            default:
+              airQualityDescription = "No disponible";
+          }
 
           set((state) => {
             state.weather = {
@@ -74,7 +97,7 @@ const useClimaStore = create<ClimaStore>()(persist(
                   ? capitalize(data.alerts.alert[0].headline)
                   : "No hay alertas para esta ubicación hoy.",
               forecastTomorrow: data.forecast.forecastday[1],
-              airQuality: data.current.air_quality["gb-defra-index"],
+              airQuality: airQualityDescription,
             };
           });
         } catch (error: any) {

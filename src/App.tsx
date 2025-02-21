@@ -4,10 +4,12 @@ import { Route, Switch } from "wouter";
 
 // componentes 
 import Clima from "./components/Clima";
-import styles from "./styles/App.module.css"
 import GuiaUsuario from "./components/GuiaUsario";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
+// estilos
+import styles from "./styles/App.module.css"
 
 export default function App() {
   return (
@@ -22,6 +24,7 @@ export default function App() {
           <GuiaUsuario />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

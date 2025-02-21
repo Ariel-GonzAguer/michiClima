@@ -9,3 +9,10 @@ html {
   color: whitesmoke;
   font-size: 1.2rem;
 }
+
+/* fuentes */
+@font-face {
+  font-family: "Zain";
+  src: local("Zain"),
+    url(/fonts/Zain/Zain-Regular.ttf) format("truetype");
+}

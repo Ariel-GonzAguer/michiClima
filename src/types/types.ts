@@ -8,7 +8,7 @@ export interface WeatherData {
   humidity: number;
   alerts: string;
   forecastTomorrow: any;
-  airQuality: number;
+  airQuality: string;
 }
 
 export interface Geolocation {
