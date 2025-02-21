@@ -13,8 +13,6 @@ export default function App() {
   return (
     <div className={styles.App}>
       <Header />
-
-      
       <Switch>
         <Route path="/">
           <Clima />

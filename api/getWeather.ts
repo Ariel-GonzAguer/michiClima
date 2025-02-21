@@ -12,7 +12,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&days=2&aqi=yes&lang=es&alerts=yes`
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&days=2&aqi=yes&lang=es&alerts=yes`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     );
     const data = await response.json();
     res.status(200).json(data);
