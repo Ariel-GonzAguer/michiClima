@@ -8,6 +8,7 @@ export interface WeatherData {
   humidity: number;
   alerts: string;
   forecastTomorrow: any;
+  fullForecast: any;
   airQuality: string;
 }
 

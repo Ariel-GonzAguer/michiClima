@@ -1,5 +1,4 @@
 // componentes
-import Boton from "./Boton";
 
 // estilos
 import styles from '../styles/GuiaUsuario.module.css'
@@ -11,7 +10,7 @@ export default function GuiaUsuario() {
         <h2>Guía de usuario</h2>
         <p>Gracias por usar MichiClima para conocer el estado del tiempo 🐱</p>
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
-        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Si no se otorga este permiso al ingresar a la página, no se podrá acceder a la ubicación precisa, lo que implica que la págian web no funcionará.</p>
+        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Si no se otorga este permiso al ingresar a la página, no se podrá acceder a la ubicación precisa, lo que implica que la págian web no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a MichiClima.</p>
         <p>Los datos del tiempo se actualizan cada vez que se refresque la página y/o cada 15 minutos.</p>
 
         <h3>Cómo interpretar los datos</h3>
@@ -64,7 +63,6 @@ export default function GuiaUsuario() {
         <p>Este dato se obtiene según las condiciones actuales del tiempo. Si el tiempo es soleado o despejado, será un buen día para lavar.</p>
         <p>En otras condiciones de tiempo, bajo ciertas circustancias (usar secadora, tender bajo techo, etc.) también sería un buen día para lavar ropa, pero al ser condiciones que dependen de cada persona, no se toman en cuenta para este proyecto.</p>
         <p className={styles.WALink}>Desarrollado gracias a los datos de <a href="https://www.weatherapi.com/" title="Free Weather API" className={styles.link} rel="noopener noreferrer">WeatherAPI.com</a></p>
-        <Boton componente="/" texto="atrás" />
       </section>
     </>
   )

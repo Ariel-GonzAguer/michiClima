@@ -17,6 +17,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       humidity: 0,
       alerts: "",
       forecastTomorrow: [],
+      fullForecast: [],
       airQuality: "No disponible",
     },
     // estado geolocalización
@@ -106,6 +107,7 @@ const useClimaStore = create<ClimaStore>()(persist(
                   ? capitalize(data.alerts.alert[0].headline)
                   : "No hay alertas para esta ubicación hoy.",
               forecastTomorrow: data.forecast.forecastday[1],
+              fullForecast: data.forecast.forecastday,
               airQuality: airQualityDescription,
             };
           });

@@ -16,7 +16,9 @@ export default function Header() {
         <h1>☀️ MichiClima 😸</h1>
 
         {
-          location === "/" ? <Boton componente="guia" texto="Guía de usuario" /> : null
+          location === "/"
+            ? <Boton componente="guia" texto="Guía de usuario" />
+            : <Boton componente="/" texto="atrás" />
         }
       </section>
     </>

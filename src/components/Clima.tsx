@@ -1,5 +1,5 @@
 // utils/basics
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // import { formatDate } from "../utils/utils";
 
 // store
@@ -7,14 +7,14 @@ import useClimaStore from "../state/useClimaStore";
 
 // componentes
 import Spinner from "./Spinner";
+import Boton from "./Boton";
 
 // estilos
 import styles from "../styles/Clima.module.css";
 
 export default function Clima() {
-  const [errorPermisosUbicacion] = useState<string>("Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación.");
 
-  const { weather, geolocation, setWeather, isLoading, LavarRopa, errores, getGeolocation } = useClimaStore();
+  const { weather, geolocation, setWeather, isLoading, LavarRopa } = useClimaStore();
 
   async function handleGetWeather() {
     await setWeather();
@@ -23,6 +23,7 @@ export default function Clima() {
   useEffect(() => {
     handleGetWeather();
     // console.log(weather.forecastTomorrow);
+    console.log(weather);
     const intervalId = setInterval(() => {
       handleGetWeather();
     }, 900000); // se ejecuta cada 15 minutos
@@ -41,62 +42,60 @@ export default function Clima() {
         </>
       ) : (
         <>
+          {
+            weather
+              ? <>
+                <section className={styles.ubicacionActual}>
+                  <p>{weather.location}</p>
+                  <p>Latitud: {geolocation.latitude}</p>
+                  <p>Longitud: {geolocation.longitude}</p>
+                </section>
 
-          {errores.length > 0 && (
-            <div className={styles.error}>
-              <p>{errores[errores.length - 1]}</p>
-              {errores.includes(errorPermisosUbicacion) && (
-                <button onClick={getGeolocation} className={styles.boton}>
-                  Solicitar Permisos de Ubicación
-                </button>
-              )}
-            </div>
-          )}
+                <section className={styles.datosClimaActual}>
+                  <p>{weather.condition}</p>
+                  <p>{`${weather.temperature}°c`}</p>
+                  <p>Viento: {`${weather.wind}km/h`}</p>
+                  {
+                    weather.img ? <img src={weather.img} alt="Weather icon" /> : null
+                  }
 
-          <section className={styles.ubicacionActual}>
-            <p>{weather.location || "🌎"}</p>
-            <p>Latitud: {geolocation.latitude || "✏️"}</p>
-            <p>Longitud: {geolocation.longitude || "✍🏼"}</p>
+                  <section className={styles.lavarRopa}>
+                    {
+                      LavarRopa ? <p>¡Hoy es un buen día para lavar ropa! 🫧</p> : <p>Hoy no es un buen día para lavar ropa 🐸</p>
+                    }
+                  </section>
 
-          </section>
+                  <p>Sensación térmica: {`${weather.feelsLike}°c`}</p>
+                  <p>Humedad: {`${weather.humidity}%`}</p>
+                  <p>Calidad del aire: {`${weather.airQuality}`}</p>
 
-          <section className={styles.datosClimaActual}>
-            <p>{weather.condition || "🌟"}</p>
-            <p>{weather.temperature ? `${weather.temperature}°c` : "🌡️"}</p>
-            <p>Viento: {weather.wind ? `${weather.wind}km/h` : "🍃"}</p>
-            {
-              weather.img ? <img src={weather.img} alt="Weather icon" /> : null
-            }
+                  {
+                    weather.alerts !== "No hay alertas para esta ubicación hoy."
+                      ? <p>Alertas 🚨 {weather.alerts}</p>
+                      : null
+                  }
 
-            <section className={styles.lavarRopa}>
-              {
-                LavarRopa ? <p>¡Hoy es un buen día para lavar ropa! 🫧</p> : <p>Hoy no es un buen día para lavar ropa 🐸</p>
-              }
-            </section>
+                </section>
 
-            <p>Sensación térmica: {weather.feelsLike ? `${weather.feelsLike}°c` : "❄️"}</p>
-            <p>Humedad: {weather.humidity ? `${weather.humidity}%` : "💧"}</p>
-            <p>Calidad del aire: {weather.airQuality ? `${weather.airQuality}` : "🌫️"}</p>
+                <section className={styles.pronosticoMañana}>
+                  {weather.forecastTomorrow && weather.forecastTomorrow.date && (
+                    <div>
+                      <h2>Pronóstico para mañana</h2>
+                      {/* <p>{formatDate(weather.forecastTomorrow.date)}</p> */}
+                      <p>{weather.forecastTomorrow.day.condition.text}</p>
 
-            {
-              weather.alerts !== "No hay alertas para esta ubicación hoy." ? <p>Alertas 🚨 {weather.alerts}</p> : null
-            }
+                      {
+                        weather.forecastTomorrow.day.condition.icon ? <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" /> : null
+                      }
+                    </div>
+                  )}
+                </section>
 
-          </section>
+                <Boton componente="/otro-datos" texto="Más datos" />
+              </>
 
-          <section className={styles.pronosticoMañana}>
-            {weather.forecastTomorrow && weather.forecastTomorrow.date && (
-              <div>
-                <h2>Pronóstico para mañana</h2>
-                {/* <p>{formatDate(weather.forecastTomorrow.date)}</p> */}
-                <p>{weather.forecastTomorrow.day.condition.text}</p>
-
-                {
-                  weather.forecastTomorrow.day.condition.icon ? <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" /> : null
-                }
-              </div>
-            )}
-          </section>
+              : <h2>Error al cargar los datos. Por favor intentarlo más tarde</h2>
+          }
         </>
       )
       }

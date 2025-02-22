@@ -4,6 +4,7 @@ import { Route, Switch } from "wouter";
 // componentes 
 import Clima from "./components/Clima";
 import GuiaUsuario from "./components/GuiaUsario";
+import OtroDatos from "./components/OtroDatos";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -22,6 +23,11 @@ export default function App() {
         <Route path="/guia">
           <GuiaUsuario />
         </Route>
+
+        <Route path="/otro-datos">
+          <OtroDatos />
+        </Route>
+
       </Switch>
       <Footer />
     </div>
