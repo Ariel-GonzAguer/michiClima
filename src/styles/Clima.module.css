@@ -1,11 +1,14 @@
 .climaSection {
-  font-family: "Zain", sans-serif;
-
+  line-height: 1.65rem;
   & p {
     font-size: 1.5rem;
   }
 
   & .datosClimaActual {
-    margin: 1.5rem;
+    margin: 1rem;
+  }
+
+  & .lavarRopa{
+    margin: 0.5rem auto 0.7rem;
   }
 }

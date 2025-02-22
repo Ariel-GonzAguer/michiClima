@@ -1,6 +1,6 @@
 // utils/basics
-import { useEffect } from "react";
-import { formatDate } from "../utils/utils";
+import { useEffect, useState } from "react";
+// import { formatDate } from "../utils/utils";
 
 // store
 import useClimaStore from "../state/useClimaStore";
@@ -12,8 +12,9 @@ import Spinner from "./Spinner";
 import styles from "../styles/Clima.module.css";
 
 export default function Clima() {
+  const [errorPermisosUbicacion] = useState<string>("Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación.");
 
-  const { weather, geolocation, setWeather, isLoading } = useClimaStore();
+  const { weather, geolocation, setWeather, isLoading, LavarRopa, errores, getGeolocation } = useClimaStore();
 
   async function handleGetWeather() {
     await setWeather();
@@ -21,7 +22,12 @@ export default function Clima() {
 
   useEffect(() => {
     handleGetWeather();
-    console.log(weather);
+    // console.log(weather.forecastTomorrow);
+    const intervalId = setInterval(() => {
+      handleGetWeather();
+    }, 900000); // se ejecuta cada 15 minutos
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -35,6 +41,18 @@ export default function Clima() {
         </>
       ) : (
         <>
+
+          {errores.length > 0 && (
+            <div className={styles.error}>
+              <p>{errores[errores.length - 1]}</p>
+              {errores.includes(errorPermisosUbicacion) && (
+                <button onClick={getGeolocation} className={styles.boton}>
+                  Solicitar Permisos de Ubicación
+                </button>
+              )}
+            </div>
+          )}
+
           <section className={styles.ubicacionActual}>
             <p>{weather.location || "🌎"}</p>
             <p>Latitud: {geolocation.latitude || "✏️"}</p>
@@ -49,6 +67,13 @@ export default function Clima() {
             {
               weather.img ? <img src={weather.img} alt="Weather icon" /> : null
             }
+
+            <section className={styles.lavarRopa}>
+              {
+                LavarRopa ? <p>¡Hoy es un buen día para lavar ropa! 🫧</p> : <p>Hoy no es un buen día para lavar ropa 🐸</p>
+              }
+            </section>
+
             <p>Sensación térmica: {weather.feelsLike ? `${weather.feelsLike}°c` : "❄️"}</p>
             <p>Humedad: {weather.humidity ? `${weather.humidity}%` : "💧"}</p>
             <p>Calidad del aire: {weather.airQuality ? `${weather.airQuality}` : "🌫️"}</p>
@@ -63,7 +88,7 @@ export default function Clima() {
             {weather.forecastTomorrow && weather.forecastTomorrow.date && (
               <div>
                 <h2>Pronóstico para mañana</h2>
-                <p>{formatDate(weather.forecastTomorrow.date)}</p>
+                {/* <p>{formatDate(weather.forecastTomorrow.date)}</p> */}
                 <p>{weather.forecastTomorrow.day.condition.text}</p>
 
                 {

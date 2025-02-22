@@ -3,4 +3,30 @@ footer {
   color: whitesmoke;
   text-align: center;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  & a {
+    text-decoration: none;
+    color: pink;
+    & :link {
+      font-weight: bolder;
+      color: whitesmoke;
+    }
+    & :visited {
+      font-weight: bolder;
+      color: whitesmoke;
+    }
+    & :active {
+      font-weight: bolder;
+      color: whitesmoke;
+    }
+
+    &:hover {
+      background-color: pink;
+      color: black;
+      height: 50%;
+      transition: background-color 0.5s;
+    }
+  }
 }

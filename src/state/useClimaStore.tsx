@@ -5,7 +5,7 @@ import { ClimaStore } from "../types/types";
 import { capitalize } from "../utils/utils";
 
 const useClimaStore = create<ClimaStore>()(persist(
-  immer((set, get) => ({
+  immer<ClimaStore>((set, get) => ({
     // estado clima
     weather: {
       condition: "",
@@ -35,19 +35,28 @@ const useClimaStore = create<ClimaStore>()(persist(
               const { latitude, longitude } = position.coords;
               set((state) => {
                 state.geolocation = { latitude, longitude };
+                // Eliminar el mensaje de error específico del array de errores
+                state.errores = state.errores.filter(
+                  (error) => error !== "Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación."
+                );
               });
               resolve(position);
             },
             (error) => {
               set((state) => {
-                state.errores.push(error.message);
+                state.errores.push("Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación.");
               });
-              reject(error);
+              reject({ error, mensaje: "Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación." });
             },
             {
               enableHighAccuracy: true,
             }
           );
+        } else {
+          set((state) => {
+            state.errores.push("Geolocalización no es soportada por este navegador.");
+          });
+          reject(new Error("Geolocalización no es soportada por este navegador."));
         }
       });
     },
@@ -68,19 +77,19 @@ const useClimaStore = create<ClimaStore>()(persist(
               airQualityDescription = "Moderada";
               break;
             case 3:
-              airQualityDescription = "No saludable";
+              airQualityDescription = "No saludable para grupos sensibles";
               break;
             case 4:
               airQualityDescription = "No saludable";
               break;
             case 5:
-              airQualityDescription = "Muy No saludable";
-              break;
-            case 6:
               airQualityDescription = "Peligrosa";
               break;
+            case 6:
+              airQualityDescription = "MUY Peligrosa";
+              break;
             default:
-              airQualityDescription = "No disponible";
+              airQualityDescription = "disponible";
           }
 
           set((state) => {
@@ -100,6 +109,8 @@ const useClimaStore = create<ClimaStore>()(persist(
               airQuality: airQualityDescription,
             };
           });
+
+          get().setLavarRopa();
         } catch (error: any) {
           set((state) => {
             state.errores.push(error.message);
@@ -108,9 +119,17 @@ const useClimaStore = create<ClimaStore>()(persist(
       }
     },
 
-    setLavarRopa: (value: boolean) => {
-      set((state: any) => {
-        state.LavarRopa = value;
+    setLavarRopa: () => {
+      const { weather } = get();
+      let lavarRopa = false;
+
+      // Definir las condiciones para lavar ropa
+      if (weather.condition.includes("Soleado") || weather.condition.includes("Despejado")) {
+        lavarRopa = true;
+      }
+
+      set((state) => {
+        state.LavarRopa = lavarRopa;
       });
     },
     setWeather: async () => {
@@ -128,7 +147,7 @@ const useClimaStore = create<ClimaStore>()(persist(
     },
   })),
   {
-    name: "useClimaStore", // Nombre de la clave en el local storage
+    name: "useClimaStore", // Nombre en el local storage
   }
 )
 );

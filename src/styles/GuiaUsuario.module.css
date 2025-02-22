@@ -1,0 +1,26 @@
+.guiaUsuario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.5rem 2rem;
+  font-size: 1.5rem;
+
+ .link {
+    text-decoration: none;
+    color: pink;
+    text-decoration: underline;
+  }
+
+  & h3 {
+    margin-top: 1.2rem;
+  }
+
+  & h4 {
+    font-size: 1.6;
+  }
+
+  & .WALink {
+    margin-bottom: 1rem;
+  }
+}

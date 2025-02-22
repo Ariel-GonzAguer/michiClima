@@ -24,6 +24,6 @@ export interface ClimaStore {
   isLoading: boolean;
   getGeolocation: () => void;
   getWeather: (lat: number, lon: number) => Promise<void>;
-  setLavarRopa: (value: boolean) => void;
   setWeather: () => Promise<void>;
+  setLavarRopa: () => void;
 }

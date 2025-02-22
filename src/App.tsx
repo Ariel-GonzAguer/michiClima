@@ -1,7 +1,6 @@
 // enrutado
 import { Route, Switch } from "wouter";
 
-
 // componentes 
 import Clima from "./components/Clima";
 import GuiaUsuario from "./components/GuiaUsario";
