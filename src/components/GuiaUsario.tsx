@@ -7,7 +7,7 @@ export default function GuiaUsuario() {
   return (
     <>
       <section className={styles.guiaUsuario}>
-        <h2>Guía de usuario</h2>
+        <h2>Guía de uso</h2>
         <p>Gracias por usar MichiClima para conocer el estado del tiempo 🐱</p>
         <p>Al usar la página acepta los <a href="/tyc">TyC</a>.</p>
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
