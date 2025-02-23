@@ -10,6 +10,8 @@ export interface WeatherData {
   forecastTomorrow: any;
   fullForecast: any;
   airQuality: string;
+  horaActual: string;
+  siguientes24Horas: [];
 }
 
 export interface Geolocation {

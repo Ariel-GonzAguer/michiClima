@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
 import { ClimaStore } from "../types/types";
-import { capitalize } from "../utils/utils";
+import { capitalize, formatDate2 } from "../utils/utils";
 
 const useClimaStore = create<ClimaStore>()(persist(
   immer<ClimaStore>((set, get) => ({
@@ -19,6 +19,8 @@ const useClimaStore = create<ClimaStore>()(persist(
       forecastTomorrow: [],
       fullForecast: [],
       airQuality: "No disponible",
+      horaActual: "",
+      siguientes24Horas: [],
     },
     // estado geolocalización
     geolocation: { latitude: 0, longitude: 0 },
@@ -109,6 +111,8 @@ const useClimaStore = create<ClimaStore>()(persist(
               forecastTomorrow: data.forecast.forecastday[1],
               fullForecast: data.forecast.forecastday,
               airQuality: airQualityDescription,
+              horaActual: formatDate2(new Date(data.current.last_updated)),
+              siguientes24Horas: data.forecast.forecastday[0].hour,
             };
           });
 
@@ -123,17 +127,33 @@ const useClimaStore = create<ClimaStore>()(persist(
 
     setLavarRopa: () => {
       const { weather } = get();
-      let lavarRopa = false;
 
-      // Definir las condiciones para lavar ropa
-      if (weather.condition.includes("Soleado") || weather.condition.includes("Despejado")) {
-        lavarRopa = true;
+      const horaActual: string = weather.horaActual;
+      const condicionActual: string = weather.condition;
+      const siguientes24Horas: { time: string; condition: { text: string } }[] = weather.siguientes24Horas;
+
+      const siguientesCuatroHoras: string[] = [];
+      siguientesCuatroHoras.push(condicionActual);
+
+      for (let i = 0; i <= siguientes24Horas.length; i++) {
+        if (siguientes24Horas[i].time === horaActual) {
+          siguientesCuatroHoras.push(siguientes24Horas[i + 1].condition.text);
+          siguientesCuatroHoras.push(siguientes24Horas[i + 2].condition.text);
+          siguientesCuatroHoras.push(siguientes24Horas[i + 3].condition.text);
+          break;
+        }
       }
 
-      set((state) => {
-        state.LavarRopa = lavarRopa;
-      });
+      if (siguientesCuatroHoras.every(condicion => condicion.includes("Soleado")
+        || condicion.includes("Despejado")
+        || condicion.includes("Parcialmente nublado"))) {
+        // console.log("Siguientes cuatro horas:", siguientesCuatroHoras); 
+        set((state) => {
+          state.LavarRopa = true;
+        });
+      }
     },
+
     setWeather: async () => {
       set(state => { state.isLoading = true; });
 

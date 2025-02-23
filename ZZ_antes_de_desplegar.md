@@ -1,4 +1,4 @@
-agregar esto a vercel.json:
+agregar esto a vercel.json para deploy, y quitarlo para desarrollo local:
 
 ```
 ,

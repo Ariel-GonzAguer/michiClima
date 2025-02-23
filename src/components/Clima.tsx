@@ -22,8 +22,7 @@ export default function Clima() {
 
   useEffect(() => {
     handleGetWeather();
-    // console.log(weather.forecastTomorrow);
-    console.log(weather);
+    //  console.log('Hora Actual →→→', weather.horaActual, 'siguientes 24Horas →→→', weather.siguientes24Horas, 'condicion actual →→→', weather.condition); // BORRAR
     const intervalId = setInterval(() => {
       handleGetWeather();
     }, 900000); // se ejecuta cada 15 minutos
@@ -61,7 +60,7 @@ export default function Clima() {
 
                   <section className={styles.lavarRopa}>
                     {
-                      LavarRopa ? <p>¡Hoy es un buen día para lavar ropa! 🫧</p> : <p>Hoy no es un buen día para lavar ropa 🐸</p>
+                      LavarRopa ? <p>¡Es un buen momento para lavar ropa! 🫧</p> : <p>No es un buen momento para lavar ropa 🐸</p>
                     }
                   </section>
 
