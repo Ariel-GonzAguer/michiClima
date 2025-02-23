@@ -81,7 +81,6 @@ export default function Clima() {
                     <div>
                       <h2>Pronóstico para mañana</h2>
                       <p>{weather.forecastTomorrow.day.condition.text}</p>
-
                       {
                         weather.forecastTomorrow.day.condition.icon ? <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" /> : null
                       }
