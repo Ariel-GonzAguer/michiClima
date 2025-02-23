@@ -7,9 +7,9 @@ export interface WeatherData {
   feelsLike: number;
   humidity: number;
   alerts: string;
-  forecastTomorrow: any;
+  forecastTomorrow: { img: string; condition: string };
   airQuality: string;
-  uv: { index: number; text: string, recomendacion: string };
+  uv: { index: number; text: string; recomendacion: string };
   condicionHorasFijas: string[];
   salidaDelSolMañana: string;
   puestaDelSolMañana: string;
@@ -29,8 +29,10 @@ export interface ClimaStore {
   LavarRopa: boolean;
   errores: string[];
   isLoading: boolean;
+  modoMichi: boolean;
   getGeolocation: () => void;
   getWeather: (lat: number, lon: number) => Promise<void>;
   setWeather: () => Promise<void>;
   setLavarRopa: () => void;
+  setModoMichi: () => void;
 }

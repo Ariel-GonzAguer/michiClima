@@ -4,6 +4,9 @@ import { persist } from "zustand/middleware";
 import { ClimaStore } from "../types/types";
 import { capitalize, formatDate2 } from "../utils/utils";
 
+// scripts
+import Michi from "../scripts/Michi";
+
 const useClimaStore = create<ClimaStore>()(persist(
   immer<ClimaStore>((set, get) => ({
     // estado clima
@@ -16,7 +19,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       feelsLike: 0,
       humidity: 0,
       alerts: "",
-      forecastTomorrow: [],
+      forecastTomorrow: { img: "", condition: "" },
       airQuality: "No disponible",
       uv: { index: 0, text: "", recomendacion: "" },
       condicionHorasFijas: [],
@@ -32,6 +35,7 @@ const useClimaStore = create<ClimaStore>()(persist(
     LavarRopa: false,
     errores: [],
     isLoading: false,
+    modoMichi: false,
 
     // acciones 
     getGeolocation: () => {
@@ -106,6 +110,10 @@ const useClimaStore = create<ClimaStore>()(persist(
             dataUV = { index: currentUV, text: "No disponible", recomendacion: "No disponible." };
           }
 
+          let imgMichi = await Michi(data.current.condition.text);
+          let imgMichiMañana = await Michi(data.forecast.forecastday[1].day.condition.text);
+
+          const { modoMichi } = get();
 
           set((state) => {
             state.weather = {
@@ -113,14 +121,18 @@ const useClimaStore = create<ClimaStore>()(persist(
               temperature: data.current.temp_c,
               wind: data.current.wind_kph,
               location: `${data.location.name}, ${data.location.region}, ${data.location.country}`,
-              img: data.current.condition.icon,
+              // img: data.current.condition.icon,
+              img: modoMichi ? imgMichi : data.current.condition.icon,
               feelsLike: data.current.heatindex_c,
               humidity: data.current.humidity,
               alerts:
                 data.alerts && data.alerts.alert && data.alerts.alert.length > 0
                   ? capitalize(data.alerts.alert[0].headline)
                   : "No hay alertas para esta ubicación hoy.",
-              forecastTomorrow: data.forecast.forecastday[1],
+              forecastTomorrow: {
+                img: modoMichi ? imgMichiMañana : data.forecast.forecastday[1].day.condition.icon,
+                condition: data.forecast.forecastday[1].day.condition.text,
+              },
               airQuality: airQualityDescription,
               uv: dataUV,
               condicionHorasFijas: [
@@ -189,6 +201,11 @@ const useClimaStore = create<ClimaStore>()(persist(
       set(state => { state.isLoading = false; });
 
     },
+    setModoMichi: () => {
+      set((state) => {
+        state.modoMichi = !state.modoMichi;
+      });
+    }
   })),
   {
     name: "useClimaStore", // Nombre en el local storage

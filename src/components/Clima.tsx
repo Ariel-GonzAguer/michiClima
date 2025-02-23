@@ -80,9 +80,9 @@ export default function Clima() {
                   {weather.forecastTomorrow && (
                     <div>
                       <h2>Pronóstico para mañana</h2>
-                      <p>{weather.forecastTomorrow.day.condition.text}</p>
+                      <p>{weather.forecastTomorrow.condition}</p>
                       {
-                        weather.forecastTomorrow.day.condition.icon ? <img src={weather.forecastTomorrow.day.condition.icon} alt="Weather icon" /> : null
+                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt="Weather icon" /> : null
                       }
                     </div>
                   )}
@@ -96,7 +96,6 @@ export default function Clima() {
         </>
       )
       }
-
     </section>
   );
 }
