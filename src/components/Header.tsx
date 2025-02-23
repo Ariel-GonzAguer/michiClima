@@ -17,7 +17,7 @@ export default function Header() {
 
         {
           location === "/"
-            ? <Boton componente="guia" texto="Guía de usuario" />
+            ? <Boton componente="guia" texto="Guía de uso" />
             : <Boton componente="/" texto="atrás" />
         }
       </section>
