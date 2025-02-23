@@ -1,0 +1,9 @@
+.otrosDatos {
+  padding: 0 1rem;
+  font-size: 1.5rem;
+
+  & h3 {
+    color: pink;
+    margin-top: 1rem;
+  }
+}

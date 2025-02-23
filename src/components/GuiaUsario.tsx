@@ -62,7 +62,7 @@ export default function GuiaUsuario() {
         <h4>¿Es un buen día para lavar?</h4>
         <p>Este dato se obtiene según las condiciones actuales del tiempo y un pronóstico para las siguientes cuatro horas desde el momento actual. Si el tiempo es soleado, despejado o parcialmente nublado durante las siguientes cuatro será un buen día para lavar. Por favor tomar en cuenta que el clima puede cambiar de un momento a otro por su propia naturaleza.</p>
         <p>En otras condiciones de tiempo, bajo ciertas circustancias (usar secadora, tender bajo techo, etc.) también sería un buen día para lavar ropa, pero al ser condiciones que dependen de cada persona, no se toman en cuenta para este proyecto.</p>
-        <p className={styles.WALink}>Desarrollado gracias a los datos de <a href="https://www.weatherapi.com/" title="Free Weather API" className={styles.link} rel="noopener noreferrer">WeatherAPI.com</a></p>
+        <p className={styles.WALink}>Desarrollado gracias a los datos de <a href="https://www.weatherapi.com/" title="Free Weather API" className={styles.link} rel="noopener noreferrer">WeatherAPI.com</a> ✨</p>
       </section>
     </>
   )

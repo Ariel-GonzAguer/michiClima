@@ -4,7 +4,7 @@ import { Route, Switch } from "wouter";
 // componentes 
 import Clima from "./components/Clima";
 import GuiaUsuario from "./components/GuiaUsario";
-import OtroDatos from "./components/OtroDatos";
+import OtroDatos from "./components/OtrosDatos";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
