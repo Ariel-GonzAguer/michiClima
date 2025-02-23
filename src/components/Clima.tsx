@@ -77,10 +77,9 @@ export default function Clima() {
                 </section>
 
                 <section className={styles.pronosticoMañana}>
-                  {weather.forecastTomorrow && weather.forecastTomorrow.date && (
+                  {weather.forecastTomorrow && (
                     <div>
                       <h2>Pronóstico para mañana</h2>
-                      {/* <p>{formatDate(weather.forecastTomorrow.date)}</p> */}
                       <p>{weather.forecastTomorrow.day.condition.text}</p>
 
                       {
