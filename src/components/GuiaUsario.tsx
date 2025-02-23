@@ -10,7 +10,7 @@ export default function GuiaUsuario() {
         <h2>Guía de usuario</h2>
         <p>Gracias por usar MichiClima para conocer el estado del tiempo 🐱</p>
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
-        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Si no se otorga este permiso al ingresar a la página, no se podrá acceder a la ubicación precisa, lo que implica que la págian web no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a MichiClima.</p>
+        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Si no se otorga este permiso al ingresar a la página por primera vez, no se podrá acceder a la ubicación precisa, lo que implica que la página web no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a MichiClima.</p>
         <p>Los datos del tiempo se actualizan cada vez que se refresque la página y/o cada 15 minutos.</p>
 
         <h3>Cómo interpretar los datos</h3>

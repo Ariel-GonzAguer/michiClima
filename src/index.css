@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  list-style: none;
 }
 
 html {
@@ -14,6 +15,5 @@ html {
 /* fuentes */
 @font-face {
   font-family: "Zain";
-  src: local("Zain"),
-    url(/fonts/Zain/Zain-Regular.ttf) format("truetype");
+  src: local("Zain"), url(/fonts/Zain/Zain-Regular.ttf) format("truetype");
 }

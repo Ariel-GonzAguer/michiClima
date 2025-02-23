@@ -17,8 +17,12 @@ const useClimaStore = create<ClimaStore>()(persist(
       humidity: 0,
       alerts: "",
       forecastTomorrow: [],
-      fullForecast: [],
       airQuality: "No disponible",
+      uv: { index: 0, text: "", recomendacion: "" },
+      condicionHorasFijas: [],
+      salidaDelSolMañana: "",
+      puestaDelSolMañana: "",
+      llovera: 0,
       horaActual: "",
       siguientes24Horas: [],
     },
@@ -38,28 +42,19 @@ const useClimaStore = create<ClimaStore>()(persist(
               const { latitude, longitude } = position.coords;
               set((state) => {
                 state.geolocation = { latitude, longitude };
-                // Eliminar el mensaje de error específico del array de errores
-                state.errores = state.errores.filter(
-                  (error) => error !== "Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación."
-                );
               });
               resolve(position);
             },
             (error) => {
               set((state) => {
-                state.errores.push("Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación.");
+                state.errores.push(error.message);
               });
-              reject({ error, mensaje: "Permisos de ubicación no otorgados. Por favor, habilite los permisos de ubicación." });
+              reject(error);
             },
             {
               enableHighAccuracy: true,
             }
           );
-        } else {
-          set((state) => {
-            state.errores.push("Geolocalización no es soportada por este navegador.");
-          });
-          reject(new Error("Geolocalización no es soportada por este navegador."));
         }
       });
     },
@@ -67,7 +62,11 @@ const useClimaStore = create<ClimaStore>()(persist(
     getWeather: async (lat: number, lon: number) => {
       {
         try {
+          // set((state) => { state.isLoading = true; });
           const response = await fetch(`/api/getWeather?lat=${lat}&lon=${lon}`);
+          if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+          } else { }
           const data = await response.json();
           const dataAirQuality = data.current.air_quality["us-epa-index"];
 
@@ -92,8 +91,21 @@ const useClimaStore = create<ClimaStore>()(persist(
               airQualityDescription = "MUY Peligrosa";
               break;
             default:
-              airQualityDescription = "disponible";
+              airQualityDescription = "No disponible";
           }
+
+          const currentUV: number = Math.round(data.current.uv);
+          let dataUV;
+          if (currentUV <= 2) {
+            dataUV = { index: currentUV, text: "Bajo", recomendacion: "No necesita protección. Puede permanecer al aire libre con seguridad usando una protección solar mínima.." };
+          } else if (currentUV >= 3 && currentUV <= 7) {
+            dataUV = { index: currentUV, text: "Moderado a alto", recomendacion: "Se necesita protección. Busque la sombra desde la mañana hasta la media tarde. Cuando esté al aire libre, aplique generosamente protector solar de amplio espectro FPS-15 o superior sobre la piel expuesta y use ropa protectora, un sombrero de ala ancha y gafas de sol." };
+          } else if (currentUV >= 8) {
+            dataUV = { index: currentUV, text: "Muy alto a extremo", recomendacion: "Se necesita protección adicional. Tenga cuidado al aire libre, especialmente desde la mañana hasta la media tarde. Si su sombra es más corta que usted, busque la sombra y use ropa protectora, un sombrero de ala ancha y gafas de sol, y aplique generosamente un mínimo de protector solar de amplio espectro con FPS-15 sobre la piel expuesta." };
+          } else {
+            dataUV = { index: currentUV, text: "No disponible", recomendacion: "No disponible." };
+          }
+
 
           set((state) => {
             state.weather = {
@@ -109,14 +121,24 @@ const useClimaStore = create<ClimaStore>()(persist(
                   ? capitalize(data.alerts.alert[0].headline)
                   : "No hay alertas para esta ubicación hoy.",
               forecastTomorrow: data.forecast.forecastday[1],
-              fullForecast: data.forecast.forecastday,
               airQuality: airQualityDescription,
+              uv: dataUV,
+              condicionHorasFijas: [
+                data.forecast.forecastday[0].hour[8].condition.text,
+                data.forecast.forecastday[0].hour[12].condition.text,
+                data.forecast.forecastday[0].hour[16].condition.text,
+                data.forecast.forecastday[0].hour[20].condition.text
+              ],
+              salidaDelSolMañana: data.forecast.forecastday[1].astro.sunrise,
+              puestaDelSolMañana: data.forecast.forecastday[1].astro.sunset,
+              llovera: data.forecast.forecastday[0].day.daily_will_it_rain,
               horaActual: formatDate2(new Date(data.current.last_updated)),
               siguientes24Horas: data.forecast.forecastday[0].hour,
             };
           });
 
           get().setLavarRopa();
+
         } catch (error: any) {
           set((state) => {
             state.errores.push(error.message);

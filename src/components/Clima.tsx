@@ -22,7 +22,7 @@ export default function Clima() {
 
   useEffect(() => {
     handleGetWeather();
-    //  console.log('Hora Actual →→→', weather.horaActual, 'siguientes 24Horas →→→', weather.siguientes24Horas, 'condicion actual →→→', weather.condition); // BORRAR
+    // console.log("weather →→→", weather);
     const intervalId = setInterval(() => {
       handleGetWeather();
     }, 900000); // se ejecuta cada 15 minutos

@@ -8,10 +8,14 @@ export interface WeatherData {
   humidity: number;
   alerts: string;
   forecastTomorrow: any;
-  fullForecast: any;
   airQuality: string;
+  uv: { index: number; text: string, recomendacion: string };
+  condicionHorasFijas: string[];
+  salidaDelSolMañana: string;
+  puestaDelSolMañana: string;
+  llovera: number;
   horaActual: string;
-  siguientes24Horas: [];
+  siguientes24Horas: any[];
 }
 
 export interface Geolocation {
