@@ -22,7 +22,6 @@ export default function Clima() {
 
   useEffect(() => {
     handleGetWeather();
-    // console.log("weather →→→", weather);
     const intervalId = setInterval(() => {
       handleGetWeather();
     }, 900000); // se ejecuta cada 15 minutos
@@ -82,6 +81,7 @@ export default function Clima() {
                       <h2>Pronóstico para mañana</h2>
                       <p>{weather.forecastTomorrow.condition}</p>
                       {
+                        // clima mañana
                         weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt="Weather icon" /> : null
                       }
                     </div>
