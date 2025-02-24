@@ -1,18 +1,18 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 // estado
-import useClimaStore from '../state/useClimaStore'
+// import useClimaStore from '../state/useClimaStore'
 
 // estilos
 import styles from '../styles/GuiaUsuario.module.css'
-import stylesB from '../styles/Boton.module.css'
+// import stylesB from '../styles/Boton.module.css'
 
 export default function GuiaUsuario() {
-  const { setModoMichi, modoMichi } = useClimaStore()
+  // const { setModoMichi, modoMichi } = useClimaStore()
 
-  useEffect(() => {
-    console.log(modoMichi);
-  }, [modoMichi]);
+  // useEffect(() => {
+  //   console.log(modoMichi);
+  // }, [modoMichi]);
 
   return (
     <>
@@ -21,13 +21,13 @@ export default function GuiaUsuario() {
         <p>Gracias por usar MichiClima para conocer el estado del tiempo 🐱</p>
         <p>Al usar la página acepta los <a href="/tyc">TyC</a>.</p>
 
-        <h3>Modo Michi</h3>
+        {/* <h3>Modo Michi</h3>
         <p>Al activar el Modo Michi, en lugar de aparecer los clásicos íconos del clima, aparecerán dos imágenes de un lindo gatito llamado Sundae, con un fondo relacionado con el clima</p>
         <button onClick={() => setModoMichi()}
           className={stylesB.boton}
           style={{ marginBottom: '1rem' }}>
           {modoMichi ? 'Desactivar modo Michi' : 'Activar modo Michi'}
-        </button>
+        </button> */}
 
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
         <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Si no se otorga este permiso al ingresar a la página por primera vez, no se podrá acceder a la ubicación precisa, lo que implica que la página web no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a MichiClima.</p>
