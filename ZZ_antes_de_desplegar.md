@@ -10,3 +10,5 @@ agregar esto a vercel.json para deploy, y quitarlo para desarrollo local:
   ]
 
 ```
+
+volver a instalar lo necesario para cloudinary y volver a react18
