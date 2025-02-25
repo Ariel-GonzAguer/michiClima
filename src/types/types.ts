@@ -13,6 +13,7 @@ export interface WeatherData {
   condicionHorasFijas: string[];
   salidaDelSolMañana: string;
   puestaDelSolMañana: string;
+  faseLunar: string;
   llovera: number;
   horaActual: string;
   siguientes24Horas: any[];

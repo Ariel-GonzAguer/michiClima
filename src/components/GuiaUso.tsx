@@ -32,7 +32,7 @@ export default function GuiaUsuario() {
         <button onClick={() => setModoMichi()}
           className={stylesB.boton}
           style={{ marginBottom: '1rem' }}>
-          {modoMichi ? 'Desactivar modo Michi' : 'Activar modo Michi'}
+          {modoMichi ? 'Desactivar Modo Michi' : 'Activar Modo Michi'}
         </button>
 
         <h3>Cómo interpretar los datos</h3>
@@ -81,13 +81,22 @@ export default function GuiaUsuario() {
         <p>El valor de la sensación térmica se define mediante una combinación de la temperatura del aire y la humedad relativa para estimar cómo se siente realmente el calor en el cuerpo humano.</p>
         <p>Cuando la humedad es alta, el sudor no se evapora tan fácilmente, lo que dificulta la regulación de la temperatura corporal y hace que el calor se sienta más intenso.</p>
 
+        <h4>Humedad 💧</h4>
+        <p>Indica la cantidad de vapor de agua presente en el aire en comparación con la cantidad máxima que el aire podría contener a esa temperatura.</p>
+        <p>Interpretación de los valores:</p>
+        <ul>
+          <li>0-30% → Aire seco, típico de climas desérticos o de invierno en interiores con calefacción.</li>
+          <li>30-60% → Humedad confortable, común en climas templados.</li>
+          <li>60-100% → Aire húmedo, puede sentirse bochornoso o propenso a lluvias, neblina o condensación.</li>
+        </ul>
+
         <h4>¿Es un buen día para lavar? 🫧</h4>
         <p>Este dato se obtiene según las condiciones actuales del tiempo y un pronóstico para las siguientes cuatro horas desde el momento actual. Si el tiempo es soleado, despejado o parcialmente nublado durante las siguientes cuatro será un buen día para lavar. Por favor tomar en cuenta que el clima puede cambiar de un momento a otro por su propia naturaleza.</p>
         <p>En otras condiciones de tiempo, bajo ciertas circustancias (usar secadora, tender bajo techo, etc.) también sería un buen día para lavar ropa, pero al ser condiciones que dependen de cada persona, no se toman en cuenta para este proyecto.</p>
 
         <h5>Créditos ✨</h5>
         <p>El gato que aparece como spinner cuando el Modo Michi está activado, es de <a href="https://giphy.com/lordtofucat" rel="noopener noreferrer">LordTofuAnimation</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
-        <p>Los sonido de gatitos son de <a href="https://pixabay.com/es/users/freesound_community-46691455/" rel="noopener noreferrer">Freesound Commnunity</a>, y se obtuvieron a través de <a href="https://pixabay.com/es/" rel="noopener noreferrer">Pixabay</a>.</p>
+        <p>Los sonidos de gatitos son de <a href="https://pixabay.com/es/users/freesound_community-46691455/" rel="noopener noreferrer">Freesound Commnunity</a>, y se obtuvieron a través de <a href="https://pixabay.com/es/" rel="noopener noreferrer">Pixabay</a>.</p>
         <p>La data del clima se obtiene gracias a <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener noreferrer">WeatherAPI.com</a></p>
       </section>
     </>

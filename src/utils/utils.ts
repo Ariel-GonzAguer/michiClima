@@ -29,3 +29,26 @@ export function maullido(audioString: string) {
   const audio = new Audio(audioString);
   audio.play();
 }
+
+export function traducirFaseLunar(fase: string): string {
+  switch (fase) {
+    case "New Moon":
+      return "Luna nueva";
+    case "Waxing Crescent":
+      return "Luna creciente";
+    case "First Quarter":
+      return "Cuarto creciente";
+    case "Waxing Gibbous":
+      return "Gibosa creciente";
+    case "Full Moon":
+      return "Luna llena";
+    case "Waning Gibbous":
+      return "Gibosa menguante";
+    case "Last Quarter":
+      return "Cuarto menguante";
+    case "Waning Crescent":
+      return "Creciente menguante";
+    default:
+      return "No se pudo determinar la fase lunar";
+  }
+}

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
 import { ClimaStore } from "../types/types";
-import { capitalize, formatDate2, formatHour } from "../utils/utils";
+import { capitalize, formatDate2, formatHour, traducirFaseLunar } from "../utils/utils";
 
 // scripts
 import Michi from "../scripts/Michi";
@@ -25,6 +25,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       condicionHorasFijas: [],
       salidaDelSolMañana: "",
       puestaDelSolMañana: "",
+      faseLunar: "",
       llovera: 0,
       horaActual: "",
       siguientes24Horas: [],
@@ -142,6 +143,7 @@ const useClimaStore = create<ClimaStore>()(persist(
               ],
               salidaDelSolMañana: data.forecast.forecastday[1].astro.sunrise,
               puestaDelSolMañana: data.forecast.forecastday[1].astro.sunset,
+              faseLunar: traducirFaseLunar(data.forecast.forecastday[0].astro.moon_phase),
               llovera: data.forecast.forecastday[0].day.daily_will_it_rain,
               horaActual: formatDate2(new Date(data.current.last_updated)),
               siguientes24Horas: data.forecast.forecastday[0].hour,

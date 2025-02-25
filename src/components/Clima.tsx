@@ -1,8 +1,8 @@
+// hooks
+import { useEffect } from "react";
+
 // utils
 import { maullido } from "../utils/utils";
-
-
-import { useEffect } from "react";
 
 // store
 import useClimaStore from "../state/useClimaStore";
@@ -16,7 +16,6 @@ import styles from "../styles/Clima.module.css";
 import stylesB from "../styles/Boton.module.css";
 
 export default function Clima() {
-
   const { weather, geolocation, setWeather, isLoading, LavarRopa, modoMichi } = useClimaStore();
 
   async function handleGetWeather() {
@@ -24,6 +23,7 @@ export default function Clima() {
   }
 
   useEffect(() => {
+    console.log(weather);
     handleGetWeather();
     const intervalId = setInterval(() => {
       handleGetWeather();
@@ -33,7 +33,6 @@ export default function Clima() {
   }, []);
 
   return (
-
     <section className={styles.climaSection}>
 
       {isLoading ? (
@@ -47,7 +46,6 @@ export default function Clima() {
               />
               : <Spinner />
           }
-
         </>
       ) : (
         <>
@@ -70,7 +68,10 @@ export default function Clima() {
                         alt={modoMichi
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
-                        onClick={() => maullido("/shari_meow_by_freesound_community.mp3")}
+                        onClick={modoMichi
+                          ? () => maullido("/shari_meow_by_freesound_community.mp3")
+                          : undefined
+                        }
                       />
                       : null
                   }
@@ -132,11 +133,13 @@ export default function Clima() {
                       <p>{weather.forecastTomorrow.condition}</p>
                       {
                         // clima mañana
-                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img}  alt={modoMichi
+                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt={modoMichi
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
-                          onClick={() => maullido("/cat_begging_by_freesound_community.mp3")}
-                          /> : null
+                          onClick={modoMichi
+                            ? () => maullido("/cat_begging_by_freesound_community.mp3")
+                            : undefined}
+                        /> : null
                       }
                     </div>
                   )}
