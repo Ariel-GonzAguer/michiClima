@@ -5,7 +5,7 @@ import { ClimaStore } from "../types/types";
 import { capitalize, formatDate2 } from "../utils/utils";
 
 // scripts
-// import Michi from "../scripts/Michi";
+import Michi from "../scripts/Michi";
 
 const useClimaStore = create<ClimaStore>()(persist(
   immer<ClimaStore>((set, get) => ({
@@ -110,10 +110,10 @@ const useClimaStore = create<ClimaStore>()(persist(
             dataUV = { index: currentUV, text: "No disponible", recomendacion: "No disponible." };
           }
 
-          // let imgMichi = await Michi(data.current.condition.text);
-          // let imgMichiMañana = await Michi(data.forecast.forecastday[1].day.condition.text);
+          let imgMichi = await Michi(data.current.condition.text);
+          let imgMichiMañana = await Michi(data.forecast.forecastday[1].day.condition.text);
 
-          // const { modoMichi } = get();
+          const { modoMichi } = get();
 
           set((state) => {
             state.weather = {
@@ -122,7 +122,7 @@ const useClimaStore = create<ClimaStore>()(persist(
               wind: data.current.wind_kph,
               location: `${data.location.name}, ${data.location.region}, ${data.location.country}`,
               // img: data.current.condition.icon,
-              img: /*modoMichi ? imgMichi :*/ data.current.condition.icon,
+              img: modoMichi ? imgMichi : data.current.condition.icon,
               feelsLike: data.current.heatindex_c,
               humidity: data.current.humidity,
               alerts:
@@ -130,7 +130,7 @@ const useClimaStore = create<ClimaStore>()(persist(
                   ? capitalize(data.alerts.alert[0].headline)
                   : "No hay alertas para esta ubicación hoy.",
               forecastTomorrow: {
-                img: /*modoMichi ? imgMichiMañana :*/ data.forecast.forecastday[1].day.condition.icon,
+                img: modoMichi ? imgMichiMañana : data.forecast.forecastday[1].day.condition.icon,
                 condition: data.forecast.forecastday[1].day.condition.text,
               },
               airQuality: airQualityDescription,
