@@ -26,7 +26,7 @@ export interface Geolocation {
 export interface ClimaStore {
   weather: WeatherData;
   geolocation: Geolocation;
-  LavarRopa: boolean;
+  LavarRopa: { booleano: boolean, siguientesCuatroHoras: string[] };
   errores: string[];
   isLoading: boolean;
   modoMichi: boolean;

@@ -1,20 +1,23 @@
-// utils/basics
+// utils
+import { maullido } from "../utils/utils";
+
+
 import { useEffect } from "react";
-// import { formatDate } from "../utils/utils";
 
 // store
 import useClimaStore from "../state/useClimaStore";
 
 // componentes
-import Spinner from "./Spinner";
+import Spinner from "./spinners/Spinner";
 import Boton from "./Boton";
 
 // estilos
 import styles from "../styles/Clima.module.css";
+import stylesB from "../styles/Boton.module.css";
 
 export default function Clima() {
 
-  const { weather, geolocation, setWeather, isLoading, LavarRopa } = useClimaStore();
+  const { weather, geolocation, setWeather, isLoading, LavarRopa, modoMichi } = useClimaStore();
 
   async function handleGetWeather() {
     await setWeather();
@@ -36,7 +39,15 @@ export default function Clima() {
       {isLoading ? (
         <>
           <p>Cargando datos del clima...</p>
-          <Spinner />
+          {
+            modoMichi
+              ? <img src="/public/CatSpinner.gif"
+                alt="Spinner de gato. Un gato rojizo girando en círculo."
+                style={{ width: "100px", height: "100px" }}
+              />
+              : <Spinner />
+          }
+
         </>
       ) : (
         <>
@@ -54,12 +65,51 @@ export default function Clima() {
                   <p>{`${weather.temperature}°c`}</p>
                   <p>Viento: {`${weather.wind}km/h`}</p>
                   {
-                    weather.img ? <img src={weather.img} alt="Weather icon" /> : null
+                    weather.img
+                      ? <img src={weather.img}
+                        alt={modoMichi
+                          ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
+                          : 'Ícono representando el clima actual'}
+                        onClick={() => maullido("/public/shari_meow_by_freesound_community.mp3")}
+                      />
+                      : null
                   }
 
                   <section className={styles.lavarRopa}>
                     {
-                      LavarRopa ? <p>¡Es un buen momento para lavar ropa! 🫧</p> : <p>No es un buen momento para lavar ropa 🐸</p>
+                      LavarRopa.booleano
+                        ?
+                        <>
+                          <p>¡Es un buen momento para lavar ropa! 🫧</p>
+                          <details>
+                            <summary className={stylesB.boton}>
+                              <p className={styles.siguientes4Horas}>Condiciones para las siguientes cuatro horas</p>
+                            </summary>
+                            <ul>
+                              {
+                                LavarRopa.siguientesCuatroHoras && LavarRopa.siguientesCuatroHoras.map((hora, index) => (
+                                  <li key={index}>{hora}</li>
+                                ))
+                              }
+                            </ul>
+                          </details>
+                        </>
+                        :
+                        <>
+                          <p>No es un buen momento para lavar ropa 🐸</p>
+                          <details>
+                            <summary className={stylesB.boton}>
+                              <p className={styles.siguientes4Horas}>Condiciones para las siguientes cuatro horas</p>
+                            </summary>
+                            <ul>
+                              {
+                                LavarRopa.siguientesCuatroHoras && LavarRopa.siguientesCuatroHoras.map((hora, index) => (
+                                  <li key={index}>{hora}</li>
+                                ))
+                              }
+                            </ul>
+                          </details>
+                        </>
                     }
                   </section>
 
@@ -82,13 +132,17 @@ export default function Clima() {
                       <p>{weather.forecastTomorrow.condition}</p>
                       {
                         // clima mañana
-                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt="Weather icon" /> : null
+                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img}  alt={modoMichi
+                          ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
+                          : 'Ícono representando el clima actual'}
+                          onClick={() => maullido("/public/cat_begging_by_freesound_community.mp3")}
+                          /> : null
                       }
                     </div>
                   )}
                 </section>
 
-                <Boton componente="/otro-datos" texto="Más datos" />
+                <Boton componente="/otros-datos" texto="Más datos" />
               </>
 
               : <h2>Error al cargar los datos. Por favor intentarlo más tarde</h2>

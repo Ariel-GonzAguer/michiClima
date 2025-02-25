@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
 import { ClimaStore } from "../types/types";
-import { capitalize, formatDate2 } from "../utils/utils";
+import { capitalize, formatDate2, formatHour } from "../utils/utils";
 
 // scripts
 import Michi from "../scripts/Michi";
@@ -32,7 +32,7 @@ const useClimaStore = create<ClimaStore>()(persist(
     // estado geolocalización
     geolocation: { latitude: 0, longitude: 0 },
     // otros estados
-    LavarRopa: false,
+    LavarRopa: { booleano: false, siguientesCuatroHoras: [] },
     errores: [],
     isLoading: false,
     modoMichi: false,
@@ -121,7 +121,6 @@ const useClimaStore = create<ClimaStore>()(persist(
               temperature: data.current.temp_c,
               wind: data.current.wind_kph,
               location: `${data.location.name}, ${data.location.region}, ${data.location.country}`,
-              // img: data.current.condition.icon,
               img: modoMichi ? imgMichi : data.current.condition.icon,
               feelsLike: data.current.heatindex_c,
               humidity: data.current.humidity,
@@ -163,17 +162,16 @@ const useClimaStore = create<ClimaStore>()(persist(
       const { weather } = get();
 
       const horaActual: string = weather.horaActual;
-      const condicionActual: string = weather.condition;
       const siguientes24Horas: { time: string; condition: { text: string } }[] = weather.siguientes24Horas;
 
       const siguientesCuatroHoras: string[] = [];
-      siguientesCuatroHoras.push(condicionActual);
 
       for (let i = 0; i <= siguientes24Horas.length; i++) {
         if (siguientes24Horas[i].time === horaActual) {
-          siguientesCuatroHoras.push(siguientes24Horas[i + 1].condition.text);
-          siguientesCuatroHoras.push(siguientes24Horas[i + 2].condition.text);
-          siguientesCuatroHoras.push(siguientes24Horas[i + 3].condition.text);
+          siguientesCuatroHoras.push(`${formatHour(siguientes24Horas[i + 1].time)}: ${siguientes24Horas[i].condition.text}`);
+          siguientesCuatroHoras.push(`${formatHour(siguientes24Horas[i + 2].time)}: ${siguientes24Horas[i + 1].condition.text}`);
+          siguientesCuatroHoras.push(`${formatHour(siguientes24Horas[i + 3].time)}: ${siguientes24Horas[i + 2].condition.text}`);
+          siguientesCuatroHoras.push(`${formatHour(siguientes24Horas[i + 4].time)}: ${siguientes24Horas[i + 3].condition.text}`);
           break;
         }
       }
@@ -181,9 +179,13 @@ const useClimaStore = create<ClimaStore>()(persist(
       if (siguientesCuatroHoras.every(condicion => condicion.includes("Soleado")
         || condicion.includes("Despejado")
         || condicion.includes("Parcialmente nublado"))) {
-        // console.log("Siguientes cuatro horas:", siguientesCuatroHoras); 
+        console.log("Siguientes cuatro horas:", siguientesCuatroHoras);
         set((state) => {
-          state.LavarRopa = true;
+          state.LavarRopa = { booleano: true, siguientesCuatroHoras: siguientesCuatroHoras };
+        });
+      } else {
+        set((state) => {
+          state.LavarRopa = { booleano: false, siguientesCuatroHoras: siguientesCuatroHoras };
         });
       }
     },

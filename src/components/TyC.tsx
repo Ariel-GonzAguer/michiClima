@@ -1,6 +1,6 @@
 
 // estilos
-import styles from "../styles/GuiaUsuario.module.css"
+import styles from "../styles/GuiaUso.module.css"
 
 export default function TyC() {
 

@@ -10,6 +10,3 @@ agregar esto a vercel.json para deploy, y quitarlo para desarrollo local:
   ]
 
 ```
-
-
-Si vuelve a fallar el despliegue, volver a commit anterior. Eliminar todo rastro de cloudinary y michi modo.
