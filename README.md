@@ -1,6 +1,6 @@
 # MichiClima 😸
 
-MichiClima es una aplicación web progresiva (PWA) que proporciona información meteorológica basada en la ubicación del usuario. La aplicación utiliza datos de WeatherAPI y ofrece una experiencia divertida con el "Modo Michi".
+MichiClima es una aplicación web progresiva (PWA) que proporciona información meteorológica basada en la ubicación de la persona usuaria. La aplicación utiliza datos de WeatherAPI y ofrece una experiencia divertida con el "Modo Michi".
 
 ## Tecnologías Utilizadas
 
@@ -23,7 +23,7 @@ El "Modo Michi" es una característica particular de MichiClima que añade un to
 
 ## Uso
 
-Al abrir la aplicación, se solicitará permiso para acceder a la ubicación del usuario. Si se concede el permiso, la aplicación mostrará la información meteorológica actual y el pronóstico para el día siguiente. La información se actualiza cada 15 minutos.
+Al abrir la aplicación, se solicitará permiso para acceder a la ubicación de la persona usuaria. Si se concede el permiso, la aplicación mostrará la información meteorológica actual y el pronóstico para el día siguiente. La información se actualiza cada 15 minutos.
 
 ## Créditos
 
