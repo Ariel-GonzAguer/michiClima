@@ -18,7 +18,7 @@ export default function OtroDatos() {
       <h3>Fase lunar</h3>
       <p>{weather.faseLunar}</p>
 
-      <h3>Clima esperado para las siguientes horas</h3>
+      <h3>Clima esperado para estas siguientes horas</h3>
       <ul>
         <li>8am: {weather.condicionHorasFijas[0]}</li>
         <li>12pm: {weather.condicionHorasFijas[1]}</li>
