@@ -97,6 +97,7 @@ export default function GuiaUsuario() {
         <h5>Créditos ✨</h5>
         <p>El gato que aparece como spinner cuando el Modo Michi está activado, es de <a href="https://giphy.com/lordtofucat" rel="noopener noreferrer">LordTofuAnimation</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
         <p>Los sonidos de gatitos son de <a href="https://pixabay.com/es/users/freesound_community-46691455/" rel="noopener noreferrer">Freesound Commnunity</a>, y se obtuvieron a través de <a href="https://pixabay.com/es/" rel="noopener noreferrer">Pixabay</a>.</p>
+        <p>La idea de la funcionalidad de "¿Es un buen día para lavar" es original de mi hermosa esposa Liany VV💖</p>
         <p>La data del clima se obtiene gracias a <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener noreferrer">WeatherAPI.com</a></p>
       </section>
     </>
