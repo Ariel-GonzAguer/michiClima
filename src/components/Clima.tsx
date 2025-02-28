@@ -116,12 +116,12 @@ export default function Clima() {
 
                   <p>Sensación térmica: {`${weather.feelsLike}°c`}</p>
                   <p>Humedad: {`${weather.humidity}%`}</p>
-                  <p>Calidad del aire: {`${weather.airQuality}`}</p>
+                  <p>Calidad del aire: {`${weather.airQuality.calidadDelAire}`}</p>
 
                   {
                     weather.alerts !== "No hay alertas para esta ubicación hoy."
-                      ? <p>Alertas 🚨 {weather.alerts}</p>
-                      : null
+                      ? <p>Alertas 🚨<br />{weather.alerts}</p>
+                      : <p>No hay alertas para esta ubicación hoy 🐱</p>
                   }
 
                 </section>

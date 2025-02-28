@@ -43,7 +43,7 @@ export default function GuiaUsuario() {
           <thead>
             <tr>
               <th>Contaminación del aire</th>
-              <th>Valor en números</th>
+              <th>Valor en números <sup>2</sup></th>
             </tr>
           </thead>
 
@@ -76,6 +76,7 @@ export default function GuiaUsuario() {
           </tbody>
         </table>
         <p><sup>1</sup> Personas con enfermedades respiratorias (como asma o EPOC), personas adultas mayores, niños y niñas, personas con enfermedades cardíacas.</p>
+        <p><sup>2 </sup>En la sección de <a href="/otros-datos">Más datos</a> se da una descripción más detallada de la calidad del aire.</p>
 
         <h4>Sensación térmica 🌡️</h4>
         <p>El valor de la sensación térmica se define mediante una combinación de la temperatura del aire y la humedad relativa para estimar cómo se siente realmente el calor en el cuerpo humano.</p>
@@ -84,20 +85,45 @@ export default function GuiaUsuario() {
         <h4>Humedad 💧</h4>
         <p>Indica la cantidad de vapor de agua presente en el aire en comparación con la cantidad máxima que el aire podría contener a esa temperatura.</p>
         <p>Interpretación de los valores:</p>
-        <ul>
-          <li>0-30% → Aire seco, típico de climas desérticos o de invierno en interiores con calefacción.</li>
-          <li>30-60% → Humedad confortable, común en climas templados.</li>
-          <li>60-100% → Aire húmedo, puede sentirse bochornoso o propenso a lluvias, neblina o condensación.</li>
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Porcentaje</th>
+              <th>Interpretación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0-30%</td>
+              <td>Aire seco, típico de climas desérticos o de invierno en interiores con calefacción.</td>
+            </tr>
+            <tr>
+              <td>30-60%</td>
+              <td>Humedad confortable, común en climas templados.</td>
+            </tr>
+            <tr>
+              <td>60-100%</td>
+              <td>Aire húmedo, puede sentirse bochornoso o propenso a lluvias, neblina o condensación.</td>
+            </tr>
+          </tbody>
+        </table>
 
         <h4>¿Es un buen día para lavar? 🫧</h4>
         <p>Este dato se obtiene según las condiciones actuales del tiempo y un pronóstico para las siguientes cuatro horas desde el momento actual. Si el tiempo es soleado, despejado o parcialmente nublado durante las siguientes cuatro será un buen día para lavar. Por favor tomar en cuenta que el clima puede cambiar de un momento a otro por su propia naturaleza.</p>
         <p>En otras condiciones de tiempo, bajo ciertas circustancias (usar secadora, tender bajo techo, etc.) también sería un buen día para lavar ropa, pero al ser condiciones que dependen de cada persona, no se toman en cuenta para este proyecto.</p>
 
+        <h4>Índice UV ☀️</h4>
+        <p>La escala del índice UV (Índice Ultravioleta) es una medida de la intensidad de la radiación ultravioleta del sol en la superficie terrestre. Ayuda a determinar el nivel de exposición a los rayos UV y el riesgo de daño para la piel y los ojos.</p>
+        <p>El número que se muestra es el índice en la escala que va de 0 a 11+. La siguiente palabra que se muestra significa el nivel de riesgo, que va de Bajo (0) a Extremo (+11). Y el texto debajo, es una recomendación.</p>
+
+        <h4>¿Es posible que llueva hoy? ☔</h4>
+        <p>Este valor se obtiene directamente del pronóstico del tiempo de Weatherapi.</p>
+
         <h5>Créditos ✨</h5>
         <p>El gato que aparece como spinner cuando el Modo Michi está activado, es de <a href="https://giphy.com/lordtofucat" rel="noopener noreferrer">LordTofuAnimation</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
         <p>Los sonidos de gatitos son de <a href="https://pixabay.com/es/users/freesound_community-46691455/" rel="noopener noreferrer">Freesound Commnunity</a>, y se obtuvieron a través de <a href="https://pixabay.com/es/" rel="noopener noreferrer">Pixabay</a>.</p>
-        <p>La idea de la funcionalidad de "¿Es un buen día para lavar" es original de mi hermosa esposa Liany VV💖</p>
+        <p>El gato blanco que aparece en la sección <a href="/otros-datos">Más datos</a> es de <a href="https://giphy.com/Kennymays" rel="noopener noreferrer">Kennysgifs</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
+        <p>La idea de la funcionalidad de "¿Es un buen día para lavar" es original de mi hermosa esposa Liany VV 💖</p>
         <p>La data del clima se obtiene gracias a <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener noreferrer">WeatherAPI.com</a></p>
       </section>
     </>

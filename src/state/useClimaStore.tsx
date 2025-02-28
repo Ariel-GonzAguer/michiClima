@@ -20,7 +20,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       humidity: 0,
       alerts: "",
       forecastTomorrow: { img: "", condition: "" },
-      airQuality: "No disponible",
+      airQuality: { calidadDelAire: "No disponible", descripcion: "No disponible" },
       uv: { index: 0, text: "", recomendacion: "" },
       condicionHorasFijas: [],
       salidaDelSolMañana: "",
@@ -75,28 +75,28 @@ const useClimaStore = create<ClimaStore>()(persist(
           const data = await response.json();
           const dataAirQuality = data.current.air_quality["us-epa-index"];
 
-          let airQualityDescription;
+          let airQualityTotal = { calidadDelAire: "No disponible", descripcion: "No disponible" };
           switch (dataAirQuality) {
             case 1:
-              airQualityDescription = "Buena";
+              airQualityTotal = { calidadDelAire: "Buena", descripcion: "La calidad del aire es satisfactoria y la contaminación atmosférica supone poco o ningún riesgo." };
               break;
             case 2:
-              airQualityDescription = "Moderada";
+              airQualityTotal = { calidadDelAire: "Moderada", descripcion: "La calidad del aire es aceptable. Sin embargo, puede suponer un riesgo para algunas personas, particularmente para aquellas que son sensibles a la contaminación del aire." };
               break;
             case 3:
-              airQualityDescription = "No saludable para grupos sensibles";
+              airQualityTotal = { calidadDelAire: "No saludable para grupos sensibles", descripcion: "Los miembros de grupos sensibles pueden sufrir efectos sobre la salud. El público en general tiene menos probabilidades de verse afectado." };
               break;
             case 4:
-              airQualityDescription = "No saludable";
+              airQualityTotal = { calidadDelAire: "No saludable", descripcion: "Algunos miembros del público en general pueden experimentar efectos sobre la salud; los miembros de grupos sensibles pueden experimentar efectos sobre la salud más graves." };
               break;
             case 5:
-              airQualityDescription = "Peligrosa";
+              airQualityTotal = { calidadDelAire: "Peligrosa", descripcion: "Alerta sanitaria: El riesgo de sufrir efectos sobre la salud aumenta para todas las personas." };
               break;
             case 6:
-              airQualityDescription = "MUY Peligrosa";
+              airQualityTotal = { calidadDelAire: "MUY Peligrosa", descripcion: "Advertencia sanitaria sobre condiciones de emergencia: todas las personas tienen mayor probabilidad de verse afectados." };
               break;
             default:
-              airQualityDescription = "No disponible";
+              airQualityTotal = { calidadDelAire: "No disponible", descripcion: "No disponible" };
           }
 
           const currentUV: number = Math.round(data.current.uv);
@@ -111,7 +111,7 @@ const useClimaStore = create<ClimaStore>()(persist(
             dataUV = { index: currentUV, text: "No disponible", recomendacion: "No disponible." };
           }
 
-          let imgMichi = await Michi(data.current.condition.text);
+          let imgMichi = await Michi({ condicion: data.current.condition.text });
           let imgMichiMañana = await Michi(data.forecast.forecastday[1].day.condition.text);
 
           const { modoMichi } = get();
@@ -133,7 +133,7 @@ const useClimaStore = create<ClimaStore>()(persist(
                 img: modoMichi ? imgMichiMañana : data.forecast.forecastday[1].day.condition.icon,
                 condition: data.forecast.forecastday[1].day.condition.text,
               },
-              airQuality: airQualityDescription,
+              airQuality: airQualityTotal,
               uv: dataUV,
               condicionHorasFijas: [
                 data.forecast.forecastday[0].hour[8].condition.text,

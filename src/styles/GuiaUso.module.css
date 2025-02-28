@@ -28,4 +28,26 @@
     color: gold;
     margin-top: 1rem;
   }
+
+  & table {
+    margin-bottom: 0.5rem;
+  }
+
+  & th,
+  td {
+    border: 2px solid whitesmoke;
+    padding: 0.3rem;
+    gap: 0;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .guiaUsuario,
+  .TyC {
+    padding: 0 4rem;
+  }
+
+  & table {
+    max-width: 50%;
+  }
 }

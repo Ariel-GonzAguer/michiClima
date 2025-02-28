@@ -8,7 +8,7 @@ export interface WeatherData {
   humidity: number;
   alerts: string;
   forecastTomorrow: { img: string; condition: string };
-  airQuality: string;
+  airQuality: {calidadDelAire: string, descripcion: string};
   uv: { index: number; text: string; recomendacion: string };
   condicionHorasFijas: string[];
   salidaDelSolMañana: string;
