@@ -41,7 +41,7 @@ export default function OtroDatos() {
 
       {
         modoMichi
-          ? <img src="src/assets/happyArtSticker_by_Kennysgifs_restCat.gif" alt="gatito blanco que se hecha después de dar unos pasos" className={styles.restCat} />
+          ? <img src="/happyArtSticker_by_Kennysgifs_restCat.gif" alt="gatito blanco que se hecha después de dar unos pasos" className={styles.restCat} />
           : null
       }
     </section>

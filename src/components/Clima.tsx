@@ -40,7 +40,7 @@ export default function Clima() {
           <p>Cargando datos del clima...</p>
           {
             modoMichi
-              ? <img src="src/assets/catSpinner.gif"
+              ? <img src="/catSpinner.gif"
                 alt="Spinner de gato. Un gato rojizo girando en círculo."
                 style={{ width: "100px", height: "100px" }}
               />
@@ -69,7 +69,7 @@ export default function Clima() {
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
                         onClick={modoMichi
-                          ? () => maullido("src/assets/shari_meow_by_freesound_community.mp3")
+                          ? () => maullido("/shari_meow_by_freesound_community.mp3")
                           : undefined
                         }
                       />
@@ -136,7 +136,7 @@ export default function Clima() {
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
                           onClick={modoMichi
-                            ? () => maullido("src/assets/cat_begging_by_freesound_community.mp3")
+                            ? () => maullido("/cat_begging_by_freesound_community.mp3")
                             : undefined}
                         /> : null
                       }
