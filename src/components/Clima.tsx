@@ -23,7 +23,7 @@ export default function Clima() {
   }
 
   useEffect(() => {
-    console.log(weather);
+    // console.log(weather);
     handleGetWeather();
     const intervalId = setInterval(() => {
       handleGetWeather();
@@ -40,7 +40,7 @@ export default function Clima() {
           <p>Cargando datos del clima...</p>
           {
             modoMichi
-              ? <img src="/catSpinner.gif"
+              ? <img src="src/assets/catSpinner.gif"
                 alt="Spinner de gato. Un gato rojizo girando en círculo."
                 style={{ width: "100px", height: "100px" }}
               />
@@ -69,7 +69,7 @@ export default function Clima() {
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
                         onClick={modoMichi
-                          ? () => maullido("/shari_meow_by_freesound_community.mp3")
+                          ? () => maullido("src/assets/shari_meow_by_freesound_community.mp3")
                           : undefined
                         }
                       />
@@ -132,12 +132,11 @@ export default function Clima() {
                       <h2>Pronóstico para mañana</h2>
                       <p>{weather.forecastTomorrow.condition}</p>
                       {
-                        // clima mañana
                         weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt={modoMichi
                           ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
                           : 'Ícono representando el clima actual'}
                           onClick={modoMichi
-                            ? () => maullido("/cat_begging_by_freesound_community.mp3")
+                            ? () => maullido("src/assets/cat_begging_by_freesound_community.mp3")
                             : undefined}
                         /> : null
                       }

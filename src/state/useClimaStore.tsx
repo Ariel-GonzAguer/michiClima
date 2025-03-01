@@ -112,7 +112,7 @@ const useClimaStore = create<ClimaStore>()(persist(
           }
 
           let imgMichi = await Michi({ condicion: data.current.condition.text });
-          let imgMichiMañana = await Michi(data.forecast.forecastday[1].day.condition.text);
+          let imgMichiMañana = await Michi({ condicion: data.forecast.forecastday[1].day.condition.text });
 
           const { modoMichi } = get();
 
@@ -181,7 +181,7 @@ const useClimaStore = create<ClimaStore>()(persist(
       if (siguientesCuatroHoras.every(condicion => condicion.includes("Soleado")
         || condicion.includes("Despejado")
         || condicion.includes("Parcialmente nublado"))) {
-        console.log("Siguientes cuatro horas:", siguientesCuatroHoras);
+        // console.log("Siguientes cuatro horas:", siguientesCuatroHoras);
         set((state) => {
           state.LavarRopa = { booleano: true, siguientesCuatroHoras: siguientesCuatroHoras };
         });
