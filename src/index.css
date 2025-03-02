@@ -15,5 +15,5 @@ html {
 /* fuentes */
 @font-face {
   font-family: "Zain";
-  src: local("Zain"), url(assets/fonts/Zain/Zain-Regular.ttf) format("truetype");
+  src: local("Zain"), url(/public/fonts/Zain/Zain-Regular.ttf) format("truetype");
 }
