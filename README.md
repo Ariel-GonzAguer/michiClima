@@ -53,6 +53,11 @@ Para instalar y ejecutar este proyecto localmente, sigue estos pasos:
    vercel dev
    ```
 
+## PENDIENTE
+- [ ] Hacer unit tests de los componentes. Posiblemente con Jest y React Testing Library.
+- [ ] Agregar modo claro.
+
+
 ## Licencia
 
 Este proyecto está licenciado bajo la Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License(CC BY-NC-SA 4.0). Consultae [LICENSE](https://creativecommons.org/licenses/by-nc/4.0/) para obtener más detalles.

@@ -7,7 +7,7 @@ import { ar1X1 } from "@cloudinary/url-gen/qualifiers/aspectRatio";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
 export default async function Michi({
-  prompt = "sky full of ",
+  prompt = "Background that reflects the weather ",
   condicion,
 }: {
   prompt?: string | undefined;
