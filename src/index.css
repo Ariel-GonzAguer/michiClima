@@ -6,8 +6,9 @@
 }
 
 html {
-  background-color: rgb(43, 43, 43);
-  color: whitesmoke;
+  background-image: url(../src/utils/SeaofClouds_SVG.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
   font-size: 1.2rem;
   font-family: "Zain", sans-serif;
 }

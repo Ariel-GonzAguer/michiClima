@@ -10,6 +10,7 @@ import useClimaStore from "../state/useClimaStore";
 // componentes
 import Spinner from "./spinners/Spinner";
 import Boton from "./Boton";
+import OrangeCat from "../utils/OrangeCat_SVG.svg"
 
 // estilos
 import styles from "../styles/Clima.module.css";
@@ -73,7 +74,7 @@ export default function Clima() {
                           : undefined
                         }
                       />
-                      : null
+                      : <img src={OrangeCat} alt="dibujo de gatito rojo girando en círculo" />
                   }
 
                   <section className={styles.lavarRopa}>
@@ -132,13 +133,14 @@ export default function Clima() {
                       <h2>Pronóstico para mañana</h2>
                       <p>{weather.forecastTomorrow.condition}</p>
                       {
-                        weather.forecastTomorrow.img ? <img src={weather.forecastTomorrow.img} alt={modoMichi
-                          ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
-                          : 'Ícono representando el clima actual'}
-                          onClick={modoMichi
-                            ? () => maullido("/cat_begging_by_freesound_community.mp3")
-                            : undefined}
-                        /> : null
+                        weather.forecastTomorrow.img ?
+                          <img src={weather.forecastTomorrow.img} alt={modoMichi
+                            ? 'Imagen de un gatito, con un fondo relacionado al estado actual del clima'
+                            : 'Ícono representando el clima actual'}
+                            onClick={modoMichi
+                              ? () => maullido("/cat_begging_by_freesound_community.mp3")
+                              : undefined}
+                          /> : <img src={OrangeCat} alt="dibujo de gatito rojo girando en círculo" />
                       }
                     </div>
                   )}

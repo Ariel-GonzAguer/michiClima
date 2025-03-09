@@ -1,5 +1,6 @@
 .guiaUsuario,
 .TyC {
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,13 +10,17 @@
 
   a {
     text-decoration: none;
-    color: pink;
+    color: black;
+    font-weight: bolder;
     text-decoration: underline;
   }
 
   & h3 {
     margin-top: 1.2rem;
-    color: pink;
+    color: black;
+    font-weight: bolder;
+    border: 3px dotted black;
+    padding: 0 0.5rem;
   }
 
   & h4 {
@@ -25,7 +30,7 @@
 
   & h5 {
     font-size: 1.5rem;
-    color: gold;
+    color: rgb(143, 121, 0);
     margin-top: 1rem;
   }
 
@@ -35,7 +40,7 @@
 
   & th,
   td {
-    border: 2px solid whitesmoke;
+    border: 2px solid black;
     padding: 0.3rem;
     gap: 0;
   }
