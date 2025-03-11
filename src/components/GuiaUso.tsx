@@ -16,7 +16,7 @@ export default function GuiaUsuario() {
         <p>Al usar la web app acepta los <a href="/tyc">TyC</a>.</p>
 
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
-        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Al ingresar por primea vez a la página, se solicita el permiso para obtener su ubicación, si no se otorga este permiso, la web app no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a <a href="michi-clima.vercel.app">MichiClima</a>.</p>
+        <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Al ingresar por primera vez a la página, se solicita el permiso para obtener su ubicación, si no se otorga este permiso, la web app no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a <a href="michi-clima.vercel.app">MichiClima</a>.</p>
         <p>Los datos del tiempo se actualizan cada vez que se refresque la página o cada 15 minutos.</p>
 
         <h3>Modo Michi</h3>

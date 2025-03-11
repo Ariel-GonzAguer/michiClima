@@ -35,3 +35,10 @@ footer {
     }
   }
 }
+
+@media only screen and (max-width: 360px) { 
+  footer {
+    font-size: 0.8rem;
+    padding: 0 0.05rem;
+  }
+}

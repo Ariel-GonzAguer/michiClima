@@ -40,12 +40,12 @@ export default function Clima() {
         <>
           <p>Cargando datos del clima...</p>
           {
-            modoMichi
-              ? <img src="/catSpinner.gif"
+            !modoMichi
+              ? <Spinner />
+              : <img src="/catSpinner.gif"
                 alt="Spinner de gato. Un gato rojizo girando en círculo."
                 style={{ width: "100px", height: "100px" }}
               />
-              : <Spinner />
           }
         </>
       ) : (
