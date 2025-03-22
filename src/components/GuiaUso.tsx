@@ -8,6 +8,9 @@ import { useLocation } from 'wouter'
 import styles from '../styles/GuiaUso.module.css'
 import stylesB from '../styles/Boton.module.css'
 
+// componentes
+import Contacto from "./Contacto"
+
 export default function GuiaUsuario() {
   const { setModoMichi, modoMichi } = useClimaStore()
 
@@ -18,7 +21,7 @@ export default function GuiaUsuario() {
       <section className={styles.guiaUsuario}>
         <h2>Guía de uso</h2>
         <p>Gracias por usar MichiClima para conocer el estado del tiempo 🐱</p>
-        <p>Al usar la web app acepta los <span onClick={()=> navigate('/tyc')}>TyC</span>.</p>
+        <p>Al usar la web app acepta los <span onClick={() => navigate('/tyc')}>TyC</span>.</p>
 
         <p>Este proyecto es una PWA(Aplicación Web Progresiva, en español) por lo que puede instalarla facilmente en su dispositivo móvil.</p>
         <p>Con MichiClima puede tener a mano los datos más relevantes sobre el tiempo atmosférico de la zona en la que se encuentra, gracias a la geolocalización que de manera nativa su dispositivo posee. Al ingresar por primera vez a la página, se solicita el permiso para obtener su ubicación, si no se otorga este permiso, la web app no funcionará. Para cambiar esto, debe borrar los datos de su navegador y volver a entrar a la página.</p>
@@ -81,7 +84,7 @@ export default function GuiaUsuario() {
           </tbody>
         </table>
         <p><sup>1</sup> Personas con enfermedades respiratorias (como asma o EPOC), personas adultas mayores, niños y niñas, personas con enfermedades cardíacas.</p>
-        <p><sup>2 </sup>En la sección de <span onClick={()=> navigate('/otros-datos')}>Más datos</span> se da una descripción más detallada de la calidad del aire.</p>
+        <p><sup>2 </sup>En la sección de <span onClick={() => navigate('/otros-datos')}>Más datos</span> se da una descripción más detallada de la calidad del aire.</p>
 
         <h4>Sensación térmica 🌡️</h4>
         <p>El valor de la sensación térmica se define mediante una combinación de la temperatura del aire y la humedad relativa para estimar cómo se siente realmente el calor en el cuerpo humano.</p>
@@ -130,6 +133,13 @@ export default function GuiaUsuario() {
         <p>El gato blanco que aparece en la sección <a href="/otros-datos">Más datos</a> es de <a href="https://giphy.com/Kennymays" rel="noopener noreferrer">Kennysgifs</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
         <p>La idea de la funcionalidad de "¿Es un buen día para lavar" es original de mi hermosa esposa Liany VV 💖</p>
         <p>La data del clima se obtiene gracias a <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener noreferrer">WeatherAPI.com</a></p>
+
+        <div>
+          <h2>Contacto</h2>
+          <Contacto />
+        </div>
+
+
       </section>
     </>
   )

@@ -37,3 +37,8 @@ export interface ClimaStore {
   setLavarRopa: () => void;
   setModoMichi: () => void;
 }
+
+export interface BotonProps {
+  componente: string;
+  texto: string;
+}
