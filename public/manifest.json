@@ -9,14 +9,16 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "/newFavicon192.jpg",
+      "src": "newFavicon192.jpg",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     },
     {
-      "src": "/newFavicon512.jpg",
+      "src": "newFavicon512.jpg",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     }
   ]
 }

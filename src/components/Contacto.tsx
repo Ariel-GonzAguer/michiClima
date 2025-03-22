@@ -7,7 +7,9 @@ const EmailForm = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<{ message: string }>({
+    message: "",
+  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -23,11 +25,14 @@ const EmailForm = () => {
       });
 
       const result = await response.json();
-      setStatus(result.message);
+      setStatus({ message: "Mensaje enviado correctamente" });
+      nameRef.current!.value = "";
+      emailRef.current!.value = "";
+      messageRef.current!.value = "";
       console.log(result);
     } catch (error) {
       console.log(error);
-      setStatus("Error al enviar el mensaje");
+      setStatus({ message: "Error al enviar el mensaje" });
     }
   };
 
@@ -46,7 +51,7 @@ const EmailForm = () => {
       <textarea ref={messageRef} placeholder="Tu mensaje" required></textarea>
       <button type="submit">Enviar</button>
 
-      {status && <p>{status}</p>}
+      {status.message && <p>{status.message}</p>}
     </form>
   );
 };
