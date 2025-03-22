@@ -38,6 +38,8 @@ const EmailForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.contactForm}>
+      {status.message && <p>{status.message}</p>}
+
       <p>
         Si quiere saber más o tiene algún comentario sobre MichiClima puede
         enviar un mensaje acá
@@ -50,8 +52,6 @@ const EmailForm = () => {
       <label htmlFor="message">Mensaje</label>
       <textarea ref={messageRef} placeholder="Tu mensaje" required></textarea>
       <button type="submit">Enviar</button>
-
-      {status.message && <p>{status.message}</p>}
     </form>
   );
 };
