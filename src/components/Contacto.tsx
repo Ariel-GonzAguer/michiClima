@@ -12,7 +12,7 @@ const EmailForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/sendEmail", {
+      const response = await fetch("/api/sendEmailResend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
