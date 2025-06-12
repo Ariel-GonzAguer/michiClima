@@ -8,9 +8,6 @@ import { useLocation } from 'wouter'
 import styles from '../styles/GuiaUso.module.css'
 import stylesB from '../styles/Boton.module.css'
 
-// componentes
-import Contacto from "./Contacto"
-
 export default function GuiaUsuario() {
   const { setModoMichi, modoMichi } = useClimaStore()
 
@@ -133,12 +130,6 @@ export default function GuiaUsuario() {
         <p>El gato blanco que aparece en la sección <a href="/otros-datos">Más datos</a> es de <a href="https://giphy.com/Kennymays" rel="noopener noreferrer">Kennysgifs</a> y se obtuvo mediante <a href="https://giphy.com/" rel="noopener noreferrer">GIPHY</a>.</p>
         <p>La idea de la funcionalidad de "¿Es un buen día para lavar" es original de mi hermosa esposa Liany VV 💖</p>
         <p>La data del clima se obtiene gracias a <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener noreferrer">WeatherAPI.com</a></p>
-
-        <div>
-          <h2>Contacto</h2>
-          <Contacto />
-        </div>
-
 
       </section>
     </>
